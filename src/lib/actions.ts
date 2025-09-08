@@ -140,12 +140,39 @@ export async function sendContactMessageAction(
   }
   
   try {
+    const { name, email, message } = validatedFields.data;
+    const webhookUrl = process.env.BREVO_WEBHOOK_URL;
+    const apiKey = process.env.BREVO_API_KEY;
+
+    if (!webhookUrl || !apiKey) {
+      throw new Error("Brevo credentials are not configured.");
+    }
+    
     // In a real application, you would send an email or save to a database here.
     // For now, we'll just log it to the console.
-    console.log("New contact message received:");
-    console.log("Name:", validatedFields.data.name);
-    console.log("Email:", validatedFields.data.email);
-    console.log("Message:", validatedFields.data.message);
+    console.log("New contact message received, sending to Brevo:");
+    console.log("Name:", name);
+    console.log("Email:", email);
+    console.log("Message:", message);
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': apiKey,
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error("Brevo API Error:", errorBody);
+      throw new Error(`Brevo API responded with status ${response.status}`);
+    }
 
     return { success: true };
   } catch (e) {
