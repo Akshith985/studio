@@ -141,43 +141,43 @@ export async function sendContactMessageAction(
   
   try {
     const { name, email, message } = validatedFields.data;
-    const webhookUrl = process.env.BREVO_WEBHOOK_URL;
     const apiKey = process.env.BREVO_API_KEY;
 
-    if (!webhookUrl || !apiKey) {
-      throw new Error("Brevo credentials are not configured.");
+    if (!apiKey) {
+      throw new Error("Brevo API Key is not configured.");
     }
-    
-    // In a real application, you would send an email or save to a database here.
-    // For now, we'll just log it to the console.
-    console.log("New contact message received, sending to Brevo:");
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Message:", message);
 
-    const response = await fetch(webhookUrl, {
+    const response = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'api-key': apiKey,
       },
       body: JSON.stringify({
-        name,
         email,
-        message,
+        attributes: {
+          // Note: 'FIRSTNAME' and 'MESSAGE' are example attribute names.
+          // You must create these attributes in your Brevo account first.
+          'FIRSTNAME': name,
+          'MESSAGE': message,
+        },
+        // If you have a specific list you want to add contacts to, specify its ID here.
+        // listIds: [123] 
       }),
     });
 
     if (!response.ok) {
-      const errorBody = await response.text();
+      const errorBody = await response.json();
       console.error("Brevo API Error:", errorBody);
-      throw new Error(`Brevo API responded with status ${response.status}`);
+      throw new Error(`Brevo API responded with status ${response.status}: ${errorBody.message}`);
     }
 
+    console.log('Successfully added contact to Brevo.');
     return { success: true };
   } catch (e) {
     console.error(e);
-    return { error: "Failed to send message. Please try again later." };
+    const errorMessage = e instanceof Error ? e.message : "An unknown error occurred.";
+    return { error: `Failed to send message. Please try again later. Details: ${errorMessage}` };
   }
 }
 
