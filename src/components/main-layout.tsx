@@ -97,12 +97,12 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
              <SidebarMenuItem>
               <SidebarMenuButton
                 asChild
-                isActive={isActive("/community")}
-                tooltip={{ children: "Community" }}
+                isActive={isActive("/chat-room")}
+                tooltip={{ children: "Chat Room" }}
               >
-                <Link href="/community">
+                <Link href="/chat-room">
                   <Users2 />
-                  <span>Community</span>
+                  <span>Chat Room</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

@@ -1,4 +1,4 @@
-// src/components/community-chat.tsx
+// src/components/chat-room.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -26,7 +26,7 @@ function SubmitButton() {
   );
 }
 
-export function CommunityChat() {
+export function ChatRoom() {
   const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([]);
   const [error, setError] = useState<string | null>(null);
