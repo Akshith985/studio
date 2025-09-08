@@ -6,8 +6,10 @@ import { getBreathingExerciseCount } from "@/ai/flows/anxiety-based-breathing-gu
 import { generateChatResponse } from "@/ai/flows/chatbot";
 import { z } from "zod";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import { cookies } from "next/headers";
+import { collection, addDoc, serverTimestamp, getDocs, query, orderBy } from "firebase/firestore";
+import { Message } from "./types";
 
 const meditationSchema = z.object({
   mood: z.string().min(3, { message: "Please describe your current feelings or mood." }),
@@ -235,4 +237,64 @@ export async function registerAction(
   } catch (e: any) {
     return { success: false, error: e.message };
   }
+}
+
+
+const messageSchema = z.object({
+  message: z.string().min(1).max(500),
+});
+
+type MessageState = {
+  success?: boolean;
+  error?: string;
+}
+
+export async function sendMessageAction(formData: FormData): Promise<MessageState | void> {
+  const user = auth.currentUser;
+  if (!user || !user.email) {
+    return { error: "You must be logged in to send a message." };
+  }
+
+  const validatedFields = messageSchema.safeParse({
+    message: formData.get("message"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors.message?.[0],
+    };
+  }
+
+  try {
+    await addDoc(collection(db, "messages"), {
+      text: validatedFields.data.message,
+      userEmail: user.email,
+      timestamp: serverTimestamp(),
+    });
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending message:", error);
+    return { error: "Failed to send message. Please try again." };
+  }
+}
+
+export async function getMessages(): Promise<{messages?: Message[], error?: string}> {
+    try {
+        const messagesCol = collection(db, 'messages');
+        const q = query(messagesCol, orderBy('timestamp', 'asc'));
+        const messageSnapshot = await getDocs(q);
+        const messageList = messageSnapshot.docs.map(doc => {
+            const data = doc.data();
+            return {
+                id: doc.id,
+                text: data.text,
+                userEmail: data.userEmail,
+                timestamp: data.timestamp.toDate(),
+            }
+        });
+        return { messages: messageList };
+    } catch (error) {
+        console.error("Error fetching messages:", error);
+        return { error: "Failed to fetch messages." };
+    }
 }

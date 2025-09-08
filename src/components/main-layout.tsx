@@ -23,6 +23,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
+import { Users2 } from "lucide-react";
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -90,6 +91,18 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 <Link href="/breathing">
                   <Wind />
                   <span>Breathing Exercises</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive("/community")}
+                tooltip={{ children: "Community" }}
+              >
+                <Link href="/community">
+                  <Users2 />
+                  <span>Community</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
