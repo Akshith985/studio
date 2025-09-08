@@ -48,14 +48,10 @@ export function Soundscapes() {
     const audioElement = audioRef.current;
     if (audioElement) {
         if (activeSoundscape) {
-            if (audioElement.src !== activeSoundscape.audioUrl) {
-               audioElement.src = activeSoundscape.audioUrl;
-            }
             audioElement.load();
             audioElement.play().catch(error => console.error("Audio playback failed:", error));
         } else {
             audioElement.pause();
-            audioElement.src = "";
         }
     }
   }, [activeSoundscape]);
@@ -81,13 +77,9 @@ export function Soundscapes() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {activeSoundscape ? (
+        {activeSoundscape && (
           <div className="relative">
             <h3 className="text-lg font-semibold mb-2">{activeSoundscape.title}</h3>
-            <audio ref={audioRef} controls autoPlay className="w-full">
-                <source src={activeSoundscape.audioUrl} type="audio/mpeg" />
-                Your browser does not support the audio element.
-            </audio>
             <Button
               variant="ghost"
               size="icon"
@@ -97,7 +89,8 @@ export function Soundscapes() {
               <X className="h-4 w-4" />
             </Button>
           </div>
-        ) : (
+        )}
+        {!activeSoundscape ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {soundscapes.map((scape) => (
               <div
@@ -130,8 +123,13 @@ export function Soundscapes() {
               </div>
             ))}
           </div>
-        )}
-         {!activeSoundscape && <audio ref={audioRef} className="hidden" />}
+        ) : null}
+
+        <audio ref={audioRef} controls className={!activeSoundscape ? 'hidden' : 'w-full'}>
+            {activeSoundscape && <source src={activeSoundscape.audioUrl} type="audio/mpeg" />}
+            Your browser does not support the audio element.
+        </audio>
+
       </CardContent>
     </Card>
   );
