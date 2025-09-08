@@ -45,15 +45,17 @@ export function Soundscapes() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    if (audioRef.current) {
+    const audioElement = audioRef.current;
+    if (audioElement) {
         if (activeSoundscape) {
-            if (audioRef.current.src !== activeSoundscape.audioUrl) {
-               audioRef.current.src = activeSoundscape.audioUrl;
+            if (audioElement.src !== activeSoundscape.audioUrl) {
+               audioElement.src = activeSoundscape.audioUrl;
             }
-            audioRef.current.play().catch(error => console.error("Audio playback failed:", error));
+            audioElement.load();
+            audioElement.play().catch(error => console.error("Audio playback failed:", error));
         } else {
-            audioRef.current.pause();
-            audioRef.current.src = "";
+            audioElement.pause();
+            audioElement.src = "";
         }
     }
   }, [activeSoundscape]);
@@ -62,6 +64,14 @@ export function Soundscapes() {
     setActiveSoundscape(null);
   };
 
+  const handleSelectSoundscape = (scape: Soundscape) => {
+    if (activeSoundscape?.title === scape.title) {
+        setActiveSoundscape(null); // Deselect if clicking the same one
+    } else {
+        setActiveSoundscape(scape);
+    }
+  };
+  
   return (
     <Card>
       <CardHeader>
@@ -74,8 +84,9 @@ export function Soundscapes() {
         {activeSoundscape ? (
           <div className="relative">
             <h3 className="text-lg font-semibold mb-2">{activeSoundscape.title}</h3>
-            <audio ref={audioRef} controls src={activeSoundscape.audioUrl} className="w-full">
-              Your browser does not support the audio element.
+            <audio ref={audioRef} controls autoPlay className="w-full">
+                <source src={activeSoundscape.audioUrl} type="audio/mpeg" />
+                Your browser does not support the audio element.
             </audio>
             <Button
               variant="ghost"
@@ -92,7 +103,7 @@ export function Soundscapes() {
               <div
                 key={scape.title}
                 className="relative group overflow-hidden rounded-lg cursor-pointer"
-                onClick={() => setActiveSoundscape(scape)}
+                onClick={() => handleSelectSoundscape(scape)}
               >
                 <Image
                   src={scape.imageUrl}
@@ -120,7 +131,7 @@ export function Soundscapes() {
             ))}
           </div>
         )}
-        <audio ref={audioRef} className="hidden" />
+         {!activeSoundscape && <audio ref={audioRef} className="hidden" />}
       </CardContent>
     </Card>
   );
