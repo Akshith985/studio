@@ -66,6 +66,12 @@ export function MoodTracker() {
       fill: moodConfig[entry.mood].color,
     }));
   }, [moodHistory]);
+  
+  const chartConfig = {
+      moodValue: {
+          label: "Mood"
+      }
+  }
 
   return (
     <Card>
@@ -97,17 +103,19 @@ export function MoodTracker() {
         <div>
           <h3 className="mb-4 text-sm font-medium text-center text-muted-foreground">Your Mood This Week</h3>
           <div className="h-[150px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData}>
-                <XAxis dataKey="date" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis hide={true} domain={[0, 4]} />
-                 <Tooltip
-                    content={<ChartTooltipContent hideLabel />}
-                    cursor={{ fill: "hsl(var(--accent))", radius: 4 }}
-                  />
-                <Bar dataKey="moodValue" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
+             <ChartContainer config={chartConfig} className="w-full h-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData}>
+                  <XAxis dataKey="date" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
+                  <YAxis hide={true} domain={[0, 4]} />
+                   <Tooltip
+                      content={<ChartTooltipContent hideLabel />}
+                      cursor={{ fill: "hsl(var(--accent))", radius: 4 }}
+                    />
+                  <Bar dataKey="moodValue" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartContainer>
           </div>
         </div>
       </CardContent>
