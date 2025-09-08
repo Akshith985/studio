@@ -1,10 +1,11 @@
+
 // src/components/main-layout.tsx
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Settings, User, UserPlus, Users, Wind } from "lucide-react";
+import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, User, UserPlus, Users, Wind } from "lucide-react";
 import { useAuth } from "@/context/auth-provider";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
