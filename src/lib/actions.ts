@@ -1,7 +1,7 @@
 
 "use server";
 
-import { generatePersonalizedMeditation, type PersonalizedMeditationInput } from "@/ai/flows/personalized-meditation";
+import { generatePersonalizedMeditation, type PersonalizedMeditationOutput } from "@/ai/flows/personalized-meditation";
 import { getBreathingExerciseCount } from "@/ai/flows/anxiety-based-breathing-guidance";
 import { generateChatResponse } from "@/ai/flows/chatbot";
 import { z } from "zod";
@@ -16,7 +16,7 @@ const meditationSchema = z.object({
 });
 
 type MeditationState = {
-  script?: string;
+  script?: PersonalizedMeditationOutput;
   error?: string;
 };
 
@@ -36,7 +36,7 @@ export async function generateMeditationAction(
 
   try {
     const result = await generatePersonalizedMeditation({ mood: validatedFields.data.mood });
-    return { script: result.script };
+    return { script: result };
   } catch (e) {
     console.error(e);
     return { error: "Failed to generate meditation. Please try again later." };

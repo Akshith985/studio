@@ -9,9 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { BrainCircuit, Loader2 } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { CheckCircle } from "lucide-react";
 
 const initialState = {
-  script: "",
+  script: undefined,
   error: "",
 };
 
@@ -76,13 +77,20 @@ export function MeditationGenerator() {
         <div ref={resultRef}>
             <Card className="bg-primary/5">
             <CardHeader>
-                <CardTitle>Your Personalized Meditation</CardTitle>
+                <CardTitle>{state.script.title}</CardTitle>
                 <CardDescription>Find a comfortable position, close your eyes, and follow the guide.</CardDescription>
             </CardHeader>
-            <CardContent>
-                <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap font-body">
-                    {state.script}
-                </div>
+            <CardContent className="prose prose-sm dark:prose-invert max-w-none font-body">
+                <p className="italic">{state.script.introduction}</p>
+                <ul className="list-none p-0">
+                    {state.script.steps.map((step, index) => (
+                        <li key={index} className="flex items-start gap-3 mb-3">
+                           <CheckCircle className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                           <span>{step}</span>
+                        </li>
+                    ))}
+                </ul>
+                <p className="italic font-semibold">{state.script.conclusion}</p>
             </CardContent>
             </Card>
         </div>

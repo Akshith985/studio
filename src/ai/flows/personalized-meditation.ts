@@ -19,16 +19,23 @@ const PersonalizedMeditationInputSchema = z.object({
   previousSessionsSummary: z
     .string()
     .optional()
-    .describe('A summary of the user\'s previous meditation sessions, if available.'),
+    .describe("A summary of the user's previous meditation sessions, if available."),
 });
 export type PersonalizedMeditationInput = z.infer<
   typeof PersonalizedMeditationInputSchema
 >;
 
 const PersonalizedMeditationOutputSchema = z.object({
-  script: z
+  title: z.string().describe('A short, calming title for the meditation.'),
+  introduction: z
     .string()
-    .describe('A personalized meditation script tailored to the user\'s current mood and previous sessions.'),
+    .describe('A brief introduction to the meditation, 1-2 sentences.'),
+  steps: z
+    .array(z.string())
+    .describe('A list of 3-5 short, simple steps for the meditation.'),
+  conclusion: z
+    .string()
+    .describe('A short concluding thought for the meditation, 1-2 sentences.'),
 });
 export type PersonalizedMeditationOutput = z.infer<
   typeof PersonalizedMeditationOutputSchema
@@ -44,12 +51,12 @@ const prompt = ai.definePrompt({
   name: 'personalizedMeditationPrompt',
   input: {schema: PersonalizedMeditationInputSchema},
   output: {schema: PersonalizedMeditationOutputSchema},
-  prompt: `You are a meditation guide. Generate a personalized meditation script based on the user's current mood and previous meditation sessions.
+  prompt: `You are a meditation guide. Generate a short, structured meditation based on the user's current mood. The entire meditation should be calm, concise, and easy to follow.
 
 Current Mood: {{{mood}}}
 Previous Sessions Summary: {{#if previousSessionsSummary}}{{{previousSessionsSummary}}}{{else}}None{{/if}}
 
-Meditation Script:`, // Keep Handlebars syntax, change prompt text, add conditional for optional field
+Generate a response with a title, a short introduction (1-2 sentences), 3-5 simple steps, and a brief conclusion (1-2 sentences).`,
 });
 
 const personalizedMeditationFlow = ai.defineFlow(
