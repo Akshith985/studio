@@ -1,9 +1,14 @@
+// src/components/main-layout.tsx
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrainCircuit, HeartPulse, LayoutDashboard, MessageCircle, Settings, User, Users, Wind } from "lucide-react";
+import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Settings, User, UserPlus, Users, Wind } from "lucide-react";
+import { useAuth } from "@/context/auth-provider";
+import { auth } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 import {
   Sidebar,
@@ -16,14 +21,24 @@ import {
   SidebarProvider,
   SidebarTrigger,
   SidebarFooter,
-  SidebarGroup,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { user, loading } = useAuth();
+  const router = useRouter();
 
   const isActive = (path: string) => pathname === path;
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    // This is a client component, so we can't use `cookies().delete` directly.
+    // A server action would be needed to clear the cookie.
+    // For now, we redirect and the middleware will handle unauthenticated state.
+    document.cookie = 'firebaseIdToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    router.push('/login');
+  };
 
   return (
     <SidebarProvider>
@@ -106,22 +121,43 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
         </SidebarContent>
         <SidebarFooter>
             <SidebarMenu>
-                 <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip={{children: "Profile"}}>
-                        <Link href="#">
-                            <User/>
-                            <span>Profile</span>
+              {!loading && user ? (
+                <>
+                  <SidebarMenuItem>
+                      <SidebarMenuButton asChild isActive={isActive("/profile")} tooltip={{children: "Profile"}}>
+                          <Link href="/profile">
+                              <User/>
+                              <span>Profile</span>
+                          </Link>
+                      </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                      <SidebarMenuButton onClick={handleLogout} tooltip={{children: "Logout"}}>
+                          <LogOut/>
+                          <span>Logout</span>
+                      </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </>
+              ) : !loading && (
+                <>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={isActive("/login")} tooltip={{children: "Login"}}>
+                        <Link href="/login">
+                            <LogIn/>
+                            <span>Login</span>
                         </Link>
                     </SidebarMenuButton>
-                 </SidebarMenuItem>
-                 <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip={{children: "Settings"}}>
-                        <Link href="#">
-                            <Settings/>
-                            <span>Settings</span>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={isActive("/register")} tooltip={{children: "Register"}}>
+                        <Link href="/register">
+                            <UserPlus/>
+                            <span>Register</span>
                         </Link>
                     </SidebarMenuButton>
-                 </SidebarMenuItem>
+                  </SidebarMenuItem>
+                </>
+              )}
             </SidebarMenu>
         </SidebarFooter>
       </Sidebar>

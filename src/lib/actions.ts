@@ -5,6 +5,9 @@ import { generatePersonalizedMeditation, type PersonalizedMeditationInput } from
 import { getBreathingExerciseCount } from "@/ai/flows/anxiety-based-breathing-guidance";
 import { generateChatResponse } from "@/ai/flows/chatbot";
 import { z } from "zod";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase";
+import { cookies } from "next/headers";
 
 const meditationSchema = z.object({
   mood: z.string().min(3, { message: "Please describe your current feelings or mood." }),
@@ -148,5 +151,61 @@ export async function sendContactMessageAction(
   } catch (e) {
     console.error(e);
     return { error: "Failed to send message. Please try again later." };
+  }
+}
+
+const authSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+type AuthState = {
+  success: boolean;
+  error?: string;
+};
+
+export async function loginAction(
+  prevState: AuthState,
+  formData: FormData
+): Promise<AuthState> {
+  const validatedFields = authSchema.safeParse(
+    Object.fromEntries(formData.entries())
+  );
+
+  if (!validatedFields.success) {
+    return { success: false, error: "Invalid email or password." };
+  }
+
+  try {
+    const { email, password } = validatedFields.data;
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const idToken = await userCredential.user.getIdToken();
+    cookies().set('firebaseIdToken', idToken, { secure: true, httpOnly: true });
+    return { success: true };
+  } catch (e: any) {
+    return { success: false, error: e.message };
+  }
+}
+
+export async function registerAction(
+  prevState: AuthState,
+  formData: FormData
+): Promise<AuthState> {
+  const validatedFields = authSchema.safeParse(
+    Object.fromEntries(formData.entries())
+  );
+
+  if (!validatedFields.success) {
+    return { success: false, error: "Invalid email or password (must be at least 6 characters)." };
+  }
+
+  try {
+    const { email, password } = validatedFields.data;
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const idToken = await userCredential.user.getIdToken();
+    cookies().set('firebaseIdToken', idToken, { secure: true, httpOnly: true });
+    return { success: true };
+  } catch (e: any) {
+    return { success: false, error: e.message };
   }
 }
