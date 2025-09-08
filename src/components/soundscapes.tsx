@@ -1,7 +1,7 @@
 // src/components/soundscapes.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "./ui/button";
@@ -42,6 +42,19 @@ type Soundscape = (typeof soundscapes)[0];
 
 export function Soundscapes() {
   const [activeSoundscape, setActiveSoundscape] = useState<Soundscape | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (activeSoundscape && audioRef.current) {
+      audioRef.current.play();
+    } else if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  }, [activeSoundscape]);
+
+  const handleStop = () => {
+    setActiveSoundscape(null);
+  };
 
   return (
     <Card>
@@ -55,14 +68,14 @@ export function Soundscapes() {
         {activeSoundscape ? (
           <div className="relative">
             <h3 className="text-lg font-semibold mb-2">{activeSoundscape.title}</h3>
-            <audio controls autoPlay src={activeSoundscape.audioUrl} className="w-full">
+            <audio ref={audioRef} controls src={activeSoundscape.audioUrl} className="w-full">
               Your browser does not support the audio element.
             </audio>
             <Button
               variant="ghost"
               size="icon"
               className="absolute top-0 right-0 -mt-2 -mr-2"
-              onClick={() => setActiveSoundscape(null)}
+              onClick={handleStop}
             >
               <X className="h-4 w-4" />
             </Button>
