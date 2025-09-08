@@ -45,10 +45,16 @@ export function Soundscapes() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    if (activeSoundscape && audioRef.current) {
-      audioRef.current.play();
-    } else if (audioRef.current) {
-      audioRef.current.pause();
+    if (audioRef.current) {
+        if (activeSoundscape) {
+            if (audioRef.current.src !== activeSoundscape.audioUrl) {
+               audioRef.current.src = activeSoundscape.audioUrl;
+            }
+            audioRef.current.play().catch(error => console.error("Audio playback failed:", error));
+        } else {
+            audioRef.current.pause();
+            audioRef.current.src = "";
+        }
     }
   }, [activeSoundscape]);
 
@@ -114,6 +120,7 @@ export function Soundscapes() {
             ))}
           </div>
         )}
+        <audio ref={audioRef} className="hidden" />
       </CardContent>
     </Card>
   );
