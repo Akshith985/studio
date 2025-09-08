@@ -250,10 +250,22 @@ type MessageState = {
 }
 
 export async function sendMessageAction(formData: FormData): Promise<MessageState | void> {
-  const user = auth.currentUser;
-  if (!user || !user.email) {
-    return { error: "You must be logged in to send a message." };
+  const token = cookies().get('firebaseIdToken')?.value;
+  let userEmail = "Anonymous";
+
+  if (token) {
+    try {
+      // In a real app, you'd verify the token with Firebase Admin SDK
+      // For this prototype, we'll just trust the client.
+      const user = auth.currentUser;
+      if (user && user.email) {
+        userEmail = user.email;
+      }
+    } catch (e) {
+      // ignore, user is anonymous
+    }
   }
+
 
   const validatedFields = messageSchema.safeParse({
     message: formData.get("message"),
@@ -268,7 +280,7 @@ export async function sendMessageAction(formData: FormData): Promise<MessageStat
   try {
     await addDoc(collection(db, "messages"), {
       text: validatedFields.data.message,
-      userEmail: user.email,
+      userEmail: userEmail,
       timestamp: serverTimestamp(),
     });
     return { success: true };

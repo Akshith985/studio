@@ -16,6 +16,7 @@ import { onSnapshot, collection, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -60,10 +61,6 @@ export function ChatRoom() {
   }, []);
 
   const handleFormSubmit = async (formData: FormData) => {
-    if (!user) {
-      setError('You must be logged in to send messages.');
-      return;
-    }
     const result = await sendMessageAction(formData);
     if (result?.error) {
       setError(result.error);
@@ -83,7 +80,7 @@ export function ChatRoom() {
   }, [messages]);
 
   const getInitials = (email?: string | null) => {
-    if (!email) return <User />;
+    if (!email || email === 'Anonymous') return <User className="h-4 w-4"/>;
     return email.substring(0, 2).toUpperCase();
   };
 
@@ -127,9 +124,14 @@ export function ChatRoom() {
           </div>
         </ScrollArea>
       </CardContent>
-      <CardFooter className="p-4 border-t">
+      <CardFooter className="p-4 border-t flex-col items-start gap-2">
+         {!user && (
+          <p className="text-sm text-muted-foreground">
+            You are chatting as a guest. <Link href="/login" className="text-primary hover:underline">Login</Link> or <Link href="/register" className="text-primary hover:underline">Register</Link> to save your name.
+          </p>
+        )}
         <form ref={formRef} action={handleFormSubmit} className="flex w-full items-center gap-2">
-          <Input name="message" placeholder="Type your message..." autoComplete="off" required disabled={!user}/>
+          <Input name="message" placeholder="Type your message..." autoComplete="off" required />
           <SubmitButton />
         </form>
         {error && (
