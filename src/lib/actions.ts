@@ -3,6 +3,7 @@
 
 import { generatePersonalizedMeditation, type PersonalizedMeditationInput } from "@/ai/flows/personalized-meditation";
 import { getBreathingExerciseCount } from "@/ai/flows/anxiety-based-breathing-guidance";
+import { generateChatResponse } from "@/ai/flows/chatbot";
 import { z } from "zod";
 
 const meditationSchema = z.object({
@@ -65,5 +66,37 @@ export async function getBreathingRecommendationsAction(
   } catch (e) {
     console.error(e);
     return { error: "Failed to get recommendations. Please try again later." };
+  }
+}
+
+const chatbotSchema = z.object({
+  message: z.string().min(1, { message: "Message cannot be empty." }),
+});
+
+type ChatbotState = {
+  response?: string;
+  error?: string;
+};
+
+export async function chatbotAction(
+  prevState: ChatbotState,
+  formData: FormData
+): Promise<ChatbotState> {
+  const validatedFields = chatbotSchema.safeParse({
+    message: formData.get("message"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors.message?.[0],
+    };
+  }
+
+  try {
+    const result = await generateChatResponse({ message: validatedFields.data.message });
+    return { response: result.response };
+  } catch (e) {
+    console.error(e);
+    return { error: "Failed to get response. Please try again later." };
   }
 }
