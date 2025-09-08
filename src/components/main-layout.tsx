@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrainCircuit, HeartPulse, LayoutDashboard, MessageCircle, Settings, User, Wind } from "lucide-react";
+import { BrainCircuit, HeartPulse, LayoutDashboard, MessageCircle, Settings, User, Users, Wind } from "lucide-react";
 
 import {
   Sidebar,
@@ -87,6 +87,18 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 <Link href="/chatbot">
                   <MessageCircle />
                   <span>AI Coach</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive("/contact")}
+                tooltip={{ children: "Contact Counsellor" }}
+              >
+                <Link href="/contact">
+                  <Users />
+                  <span>Contact Counsellor</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
