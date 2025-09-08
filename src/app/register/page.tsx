@@ -54,7 +54,7 @@ export default function RegisterPage() {
           <CardHeader className="text-center">
             <CardTitle>Create an Account</CardTitle>
             <CardDescription>
-              Join Mindful Moment to start your wellness journey.
+              Join SereneMind to start your wellness journey.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

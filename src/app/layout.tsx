@@ -5,8 +5,8 @@ import "./globals.css";
 import { AuthProvider } from "@/context/auth-provider";
 
 export const metadata: Metadata = {
-  title: "Mindful Moment",
-  description: "Your personal guide to mental wellness.",
+  title: "SereneMind",
+  description: "Find your calm with SereneMind, your personal guide to mental wellness.",
 };
 
 export default function RootLayout({

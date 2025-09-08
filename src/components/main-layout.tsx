@@ -52,7 +52,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 </Link>
             </Button>
             <div className="flex flex-col">
-              <h2 className="text-lg font-semibold tracking-tight">Mindful Moment</h2>
+              <h2 className="text-lg font-semibold tracking-tight">SereneMind</h2>
             </div>
           </div>
         </SidebarHeader>
@@ -178,7 +178,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
         <header className="mb-6 flex items-center justify-between md:hidden">
              <Link href="/" className="flex items-center gap-2 text-primary">
                 <HeartPulse className="h-6 w-6" />
-                <span className="text-lg font-bold">Mindful Moment</span>
+                <span className="text-lg font-bold">SereneMind</span>
             </Link>
             <SidebarTrigger />
         </header>
