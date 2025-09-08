@@ -1,11 +1,12 @@
 
+
 // src/components/main-layout.tsx
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, User, UserPlus, Users, Wind } from "lucide-react";
+import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Phone, User, UserPlus, Users, Wind } from "lucide-react";
 import { useAuth } from "@/context/auth-provider";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
@@ -128,6 +129,18 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 <Link href="/contact">
                   <Users />
                   <span>Contact Counsellor</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive("/video-call")}
+                tooltip={{ children: "Video Call" }}
+              >
+                <Link href="/video-call">
+                  <Phone />
+                  <span>Video Call</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
