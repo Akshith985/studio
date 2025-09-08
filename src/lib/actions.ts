@@ -100,3 +100,53 @@ export async function chatbotAction(
     return { error: "Failed to get response. Please try again later." };
   }
 }
+
+
+const contactSchema = z.object({
+  name: z.string().min(2, { message: "Please enter your name." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  message: z.string().min(10, { message: "Please enter a message of at least 10 characters." }),
+});
+
+
+type ContactState = {
+    success?: boolean;
+    error?: string;
+    errors?: {
+        name?: string[];
+        email?: string[];
+        message?: string[];
+    };
+};
+
+export async function sendContactMessageAction(
+  prevState: ContactState,
+  formData: FormData
+): Promise<ContactState> {
+  const validatedFields = contactSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    message: formData.get("message"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      error: 'Please check the form for errors.'
+    };
+  }
+  
+  try {
+    // In a real application, you would send an email or save to a database here.
+    // For now, we'll just log it to the console.
+    console.log("New contact message received:");
+    console.log("Name:", validatedFields.data.name);
+    console.log("Email:", validatedFields.data.email);
+    console.log("Message:", validatedFields.data.message);
+
+    return { success: true };
+  } catch (e) {
+    console.error(e);
+    return { error: "Failed to send message. Please try again later." };
+  }
+}
