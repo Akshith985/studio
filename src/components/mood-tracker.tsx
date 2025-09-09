@@ -53,10 +53,10 @@ export function MoodTracker() {
         </div>
         <div className="flex justify-center items-center">
             <Image 
-                src="https://picsum.photos/250/250"
+                src="https://picsum.photos/64/64"
                 alt="Your friendly mascot"
-                width={250}
-                height={250}
+                width={64}
+                height={64}
                 data-ai-hint="mascot monster"
                 className="rounded-lg"
             />
