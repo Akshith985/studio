@@ -36,7 +36,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
   const [state, formAction] = useActionState(chatbotAction, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-   const initialMessageSent = useRef(false);
+  const initialMessageSent = useRef(false);
 
   useEffect(() => {
     // This effect handles the response from the AI for both initial and subsequent messages.
@@ -53,7 +53,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
     if (scrollAreaRef.current) {
         // A bit of a hack to scroll to the bottom.
         // scrollAreaRef.current.children[1] is the viewport.
-        const viewport = scrollArea_current_children[1];
+        const viewport = scrollAreaRef.current.children[1] as HTMLDivElement;
         if (viewport) {
            viewport.scrollTop = viewport.scrollHeight;
         }
@@ -69,7 +69,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
         formAction(formData);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialMessage, formAction]);
+  }, [initialMessage]);
 
   return (
     <Card className="flex flex-col flex-1">
