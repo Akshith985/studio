@@ -9,9 +9,6 @@ export function Soundscapes() {
     <Card>
       <CardHeader>
         <CardTitle>Check this out!</CardTitle>
-        <CardDescription>
-          Take a moment to unwind with calming visuals.
-        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid md:grid-cols-2 gap-6 items-center">
