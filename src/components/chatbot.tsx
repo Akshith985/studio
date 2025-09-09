@@ -81,7 +81,7 @@ export function Chatbot() {
               >
                 {message.role === "assistant" && (
                   <Avatar>
-                    <AvatarImage src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG00dDA4bWRkZ21rdGNuNGRtZzQ5MnB6eXA5dzY2cXBicmU4eWhuYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3oKIPgnk3I5aSEbHwY/giphy.gif" alt="AI Assistant" unoptimized data-ai-hint="friendly robot" />
+                    <AvatarImage src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWN3eDR2bnVqNWdya2ZiZ3Jpa2I0c2FiaXo1djVqcGkwdWJraG5oNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xnmqgLtQZv9M1fo6n4/giphy.gif" alt="AI Assistant" unoptimized data-ai-hint="friendly robot" />
                     <AvatarFallback>
                       <Bot />
                     </AvatarFallback>
