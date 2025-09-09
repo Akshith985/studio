@@ -14,17 +14,21 @@ export function Soundscapes() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex justify-center items-center">
-            <div className="w-full max-w-lg aspect-video relative overflow-hidden rounded-lg">
+        <div className="flex items-center gap-6">
+            <div className="relative overflow-hidden rounded-lg flex-shrink-0">
                  <Image 
                     src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDJteXptaGJzYnY3a3gzc285azRjdWR3NmRnNWxxZHgxZGZmaXhueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TjEXENVrA4PxUsn0zM/giphy.gif"
                     alt="Calming visual"
-                    fill
+                    width={96}
+                    height={96}
                     unoptimized
-                    className="object-cover"
+                    className="object-cover rounded-lg"
                     data-ai-hint="cozy fireplace"
                 />
             </div>
+            <p className="text-muted-foreground italic">
+                Let the gentle flicker of the fire bring you a sense of peace and tranquility.
+            </p>
         </div>
       </CardContent>
     </Card>
