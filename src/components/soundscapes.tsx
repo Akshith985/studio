@@ -49,10 +49,12 @@ export function Soundscapes() {
     const audioElement = audioRef.current;
     if (audioElement) {
         if (activeSoundscape) {
+            audioElement.src = activeSoundscape.audioUrl;
             audioElement.load();
             audioElement.play().catch(error => console.error("Audio playback failed:", error));
         } else {
             audioElement.pause();
+            audioElement.src = "";
         }
     }
   }, [activeSoundscape]);
@@ -62,8 +64,12 @@ export function Soundscapes() {
   };
 
   const handleSelectSoundscape = (scape: Soundscape) => {
+    if (audioRef.current && !audioRef.current.paused) {
+        audioRef.current.pause();
+    }
+    
     if (activeSoundscape?.title === scape.title) {
-        setActiveSoundscape(null); // Deselect if clicking the same one
+        setActiveSoundscape(null);
     } else {
         setActiveSoundscape(scape);
     }
@@ -127,7 +133,6 @@ export function Soundscapes() {
         ) : null}
 
         <audio ref={audioRef} controls className={!activeSoundscape ? 'hidden' : 'w-full mt-4'}>
-            {activeSoundscape && <source src={activeSoundscape.audioUrl} type="audio/mpeg" />}
             Your browser does not support the audio element.
         </audio>
 
