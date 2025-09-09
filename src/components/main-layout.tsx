@@ -73,6 +73,16 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+            {!loading && user && (
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/profile")} tooltip={{children: "Profile"}}>
+                  <Link href="/profile">
+                    <User/>
+                    <span>Profile</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            )}
             <SidebarMenuItem>
               <SidebarMenuButton
                 asChild
@@ -145,16 +155,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-             {!loading && user && (
-                <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/profile")} tooltip={{children: "Profile"}}>
-                        <Link href="/profile">
-                            <User/>
-                            <span>Profile</span>
-                        </Link>
-                    </SidebarMenuButton>
-                </SidebarMenuItem>
-              )}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
