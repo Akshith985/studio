@@ -45,7 +45,6 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
         ...prev,
         { role: "assistant", content: state.response },
       ]);
-      formRef.current?.reset();
     }
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.response, state.error]);
@@ -70,7 +69,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
         formAction(formData);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialMessage])
+  }, [initialMessage]);
 
   return (
     <Card className="flex flex-col flex-1">
@@ -121,11 +120,11 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
           action={(formData: FormData) => {
             const message = formData.get("message") as string;
             if (!message.trim()) return;
-
+            formRef.current?.reset();
             setMessages((prev) => [...prev, { role: "user", content: message }]);
             formAction(formData);
           }}
-          className="flex w-full items-center gap-2 mt-4"
+          className="flex w-full items-center gap-2"
         >
           <Input
             name="message"
