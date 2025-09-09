@@ -92,22 +92,28 @@ export default function ContactPage() {
         <Card>
           <form ref={formRef} action={formAction}>
             <CardHeader>
-                <div className="flex justify-between items-center gap-4">
+                <div className="flex justify-between items-start gap-4">
                     <div>
                         <CardTitle>Booking Form</CardTitle>
                         <CardDescription>
                             Your request will be sent securely to the selected professional.
                         </CardDescription>
                     </div>
-                     <Image
-                        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExczA0bmVhenEzMjVsMjU3bngwYWl4Z3Npb2o5bnphdXJyMG5oYWl6dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iCtxYMMqOH933M4Ey2/giphy.gif"
-                        alt="Booking GIF"
-                        width={80}
-                        height={80}
-                        unoptimized
-                        className="rounded-lg"
-                        data-ai-hint="calendar booking"
-                    />
+                    <div className="flex items-center gap-4">
+                         <div className="relative bg-muted p-4 rounded-lg rounded-br-none shadow-md">
+                            <p className="text-md italic text-foreground">&quot;Help is a call away!&quot;</p>
+                             <div className="absolute bottom-0 right-[-10px] w-0 h-0 border-t-[10px] border-t-transparent border-l-[10px] border-l-muted border-b-[10px] border-b-transparent"></div>
+                        </div>
+                         <Image
+                            src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExczA0bmVhenEzMjVsMjU3bngwYWl4Z3Npb2o5bnphdXJyMG5oYWl6dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iCtxYMMqOH933M4Ey2/giphy.gif"
+                            alt="Booking GIF"
+                            width={80}
+                            height={80}
+                            unoptimized
+                            className="rounded-lg"
+                            data-ai-hint="friendly cat"
+                        />
+                    </div>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
