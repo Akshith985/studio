@@ -55,8 +55,8 @@ export function MoodTracker() {
             <Image 
                 src="https://i.pinimg.com/originals/dd/aa/81/ddaa813eef9fb1c57a8dfd6142a3d955.gif"
                 alt="Your friendly mascot"
-                width={64}
-                height={64}
+                width={150}
+                height={150}
                 unoptimized
                 className="rounded-lg"
             />
