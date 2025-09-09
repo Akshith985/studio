@@ -53,7 +53,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
     if (scrollAreaRef.current) {
         // A bit of a hack to scroll to the bottom.
         // scrollAreaRef.current.children[1] is the viewport.
-        const viewport = scrollAreaRef.current.children[1];
+        const viewport = scrollArea_current_children[1];
         if (viewport) {
            viewport.scrollTop = viewport.scrollHeight;
         }
@@ -69,7 +69,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
         formAction(formData);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialMessage]);
+  }, [initialMessage, formAction]);
 
   return (
     <Card className="flex flex-col flex-1">
