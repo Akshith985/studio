@@ -110,7 +110,7 @@ export function Chatbot() {
         </ScrollArea>
       </CardContent>
       <CardFooter className="p-4 border-t">
-        <form ref={formRef} action={handleFormAction} className="flex w-full items-center gap-2">
+        <form ref={formRef} action={handleFormAction} className="flex w-full items-center gap-2 mt-4">
           <Input
             name="message"
             placeholder="Type your message..."
