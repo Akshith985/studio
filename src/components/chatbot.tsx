@@ -36,15 +36,18 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
   const [state, formAction] = useActionState(chatbotAction, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+   const initialMessageSent = useRef(false);
 
   useEffect(() => {
-    if (state.response) {
+    // This effect handles the response from the AI for both initial and subsequent messages.
+    if (state.response && messages[messages.length - 1]?.role === 'user') {
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: state.response },
       ]);
       formRef.current?.reset();
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.response, state.error]);
   
   useEffect(() => {
@@ -59,15 +62,12 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
   }, [messages])
 
   useEffect(() => {
-    if (initialMessage) {
+    if (initialMessage && !initialMessageSent.current) {
+        initialMessageSent.current = true;
         const formData = new FormData();
         formData.append("message", initialMessage);
         setMessages([{ role: "user", content: initialMessage }]);
-        chatbotAction(initialState, formData).then(newState => {
-             if (newState.response) {
-                setMessages(prev => [...prev, { role: "assistant", content: newState.response! }]);
-            }
-        });
+        formAction(formData);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialMessage])
@@ -125,7 +125,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
             setMessages((prev) => [...prev, { role: "user", content: message }]);
             formAction(formData);
           }}
-          className="flex w-full items-center gap-2"
+          className="flex w-full items-center gap-2 mt-4"
         >
           <Input
             name="message"
