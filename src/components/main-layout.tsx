@@ -162,31 +162,33 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter className="p-4 space-y-4">
+        <SidebarFooter>
+          <SidebarMenu>
             {!loading && user && (
-              <Popover>
-                <PopoverTrigger asChild>
-                  <div className="rounded-lg bg-accent/50 p-3 space-y-2 group-data-[collapsible=icon]:hidden cursor-pointer hover:bg-accent">
-                      <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Trophy className="h-5 w-5 text-yellow-500"/>
-                            <span className="font-semibold text-sm">Wellness Level 5</span>
-                          </div>
-                          <span className="text-xs text-muted-foreground">60%</span>
-                      </div>
-                      <Progress value={60} className="h-2" />
-                  </div>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto" align="end" side="top">
-                  <div className="flex items-center gap-2 text-sm font-semibold">
-                    <Sparkles className="h-5 w-5 text-primary"/>
-                    <span>{points.toLocaleString()} Points</span>
-                  </div>
-                </PopoverContent>
-              </Popover>
+               <SidebarMenuItem>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <SidebarMenuButton variant="outline" className="h-auto w-full flex-col items-start p-2" tooltip={{children: "Wellness Level & Points", side: "right", align: "center"}}>
+                        <div className="flex w-full items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <Trophy className="h-5 w-5 text-yellow-500"/>
+                              <span className="font-semibold text-sm">Wellness Level 5</span>
+                            </div>
+                            <span className="text-xs text-muted-foreground">60%</span>
+                        </div>
+                        <Progress value={60} className="mt-2 h-2 w-full" />
+                    </SidebarMenuButton>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto" align="end" side="top">
+                    <div className="flex items-center gap-2 text-sm font-semibold">
+                      <Sparkles className="h-5 w-5 text-primary"/>
+                      <span>{points.toLocaleString()} Points</span>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              </SidebarMenuItem>
             )}
             <SidebarSeparator />
-            <SidebarMenu>
               {!loading && user ? (
                   <SidebarMenuItem>
                       <SidebarMenuButton onClick={handleLogout} tooltip={{children: "Logout"}}>
