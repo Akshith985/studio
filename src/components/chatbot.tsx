@@ -46,14 +46,6 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
       formRef.current?.reset();
     }
   }, [state.response, state.error]);
-
-  const handleFormAction = (formData: FormData) => {
-    const message = formData.get("message") as string;
-    if (!message.trim()) return;
-
-    setMessages((prev) => [...prev, { role: "user", content: message }]);
-    formAction(formData);
-  };
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -70,7 +62,8 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
     if (initialMessage) {
         const formData = new FormData();
         formData.append("message", initialMessage);
-        handleFormAction(formData);
+        setMessages((prev) => [...prev, { role: "user", content: initialMessage }]);
+        formAction(formData);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialMessage])
@@ -119,7 +112,17 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
         </ScrollArea>
       </CardContent>
       <CardFooter className="p-4 border-t">
-        <form ref={formRef} action={handleFormAction} className="flex w-full items-center gap-2 mt-4">
+        <form
+          ref={formRef}
+          action={(formData: FormData) => {
+            const message = formData.get("message") as string;
+            if (!message.trim()) return;
+
+            setMessages((prev) => [...prev, { role: "user", content: message }]);
+            formAction(formData);
+          }}
+          className="flex w-full items-center gap-2 mt-4"
+        >
           <Input
             name="message"
             placeholder="Type your message..."
