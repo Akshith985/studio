@@ -60,10 +60,14 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
 
   useEffect(() => {
     if (initialMessage) {
+        setMessages([{ role: "user", content: initialMessage }]);
         const formData = new FormData();
         formData.append("message", initialMessage);
-        setMessages([{ role: "user", content: initialMessage }]);
-        formAction(formData);
+        chatbotAction(initialState, formData).then(newState => {
+             if (newState.response) {
+                setMessages(prev => [...prev, { role: "assistant", content: newState.response! }]);
+            }
+        });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialMessage])
@@ -121,7 +125,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
             setMessages((prev) => [...prev, { role: "user", content: message }]);
             formAction(formData);
           }}
-          className="flex w-full items-center gap-2 mt-4"
+          className="flex w-full items-center gap-2"
         >
           <Input
             name="message"
