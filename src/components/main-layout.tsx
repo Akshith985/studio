@@ -221,13 +221,13 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 )}
                  <Button variant="ghost" size="icon" className="relative h-10 w-10">
                     <Image
-                        src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Foc3o3eGh1eGNxNTA5eG8wMno0bzE5Z2xneWdteHN6eWc3aXp6cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/NF6A4zE12LgdYIuYxN/giphy.gif"
+                        src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGdkeDlvcjN5YzY3amFmd2d4eTU2YjJuMTcxNnF5ZmlsMjI0N3ZuaCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/3ohhwJPSL00H2r6Rhe/giphy.gif"
                         alt="Gift Icon"
                         width={40}
                         height={40}
                         unoptimized
                         className="rounded-full object-cover"
-                        data-ai-hint="gift box"
+                        data-ai-hint="dancing cat"
                     />
                 </Button>
             </div>
