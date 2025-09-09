@@ -100,20 +100,18 @@ export function MoodTracker() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>What's the problem champ?</AlertDialogTitle>
-            <AlertDialogDescription>
-              We all have our tough days. Remember to be kind to yourself. Sometimes a few deep breaths can make a world of difference.
-            </AlertDialogDescription>
           </AlertDialogHeader>
-           <div className="flex justify-center">
+           <div className="flex items-center gap-4">
              <Image 
                 src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTJkeGdvMzB1ZGFoOG1uaXBsMDh5NDZobmpzbWVtN2F0Y2VyOWpmayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/4tyXpIGdDdPdF7E5ok/giphy.gif"
                 alt="Supportive pat"
-                width={200}
-                height={200}
+                width={250}
+                height={250}
                 unoptimized
                 className="rounded-lg"
                 data-ai-hint="supportive pat"
             />
+            <p className="text-lg font-medium text-muted-foreground">Remember, take time for yourself.</p>
            </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Close</AlertDialogCancel>
