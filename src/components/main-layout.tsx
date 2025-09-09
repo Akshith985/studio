@@ -28,6 +28,16 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const pageTitles: { [key: string]: string } = {
     '/': 'Dashboard',
@@ -234,17 +244,36 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                         <span>{points.toLocaleString()} Points</span>
                     </div>
                 )}
-                 <Button variant="ghost" size="icon" className="relative h-10 w-10">
-                    <Image
-                        src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGdkeDlvcjN5YzY3amFmd2d4eTU2YjJuMTcxNnF5ZmlsMjI0N3ZuaCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/3ohhwJPSL00H2r6Rhe/giphy.gif"
-                        alt="Gift Icon"
-                        width={40}
-                        height={40}
-                        unoptimized
-                        className="rounded-full object-cover"
-                        data-ai-hint="dancing cat"
-                    />
-                </Button>
+                 <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="ghost" size="icon" className="relative h-10 w-10">
+                          <Image
+                              src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGdkeDlvcjN5YzY3amFmd2d4eTU2YjJuMTcxNnF5ZmlsMjI0N3ZuaCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/3ohhwJPSL00H2r6Rhe/giphy.gif"
+                              alt="Gift Icon"
+                              width={40}
+                              height={40}
+                              unoptimized
+                              className="rounded-full object-cover"
+                              data-ai-hint="dancing cat"
+                          />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Your Wellness Rewards</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          You've earned points by engaging with the app. Keep it up!
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <div className="flex items-center justify-center gap-4 py-8">
+                        <Sparkles className="h-12 w-12 text-primary" />
+                        <p className="text-6xl font-bold">{points.toLocaleString()}</p>
+                      </div>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Close</AlertDialogCancel>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
             </div>
         </header>
         <div className="flex-1">
