@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect, useActionState } from "react";
@@ -80,6 +81,7 @@ export function Chatbot() {
               >
                 {message.role === "assistant" && (
                   <Avatar>
+                    <AvatarImage src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG00dDA4bWRkZ21rdGNuNGRtZzQ5MnB6eXA5dzY2cXBicmU4eWhuYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3oKIPgnk3I5aSEbHwY/giphy.gif" alt="AI Assistant" unoptimized data-ai-hint="friendly robot" />
                     <AvatarFallback>
                       <Bot />
                     </AvatarFallback>
