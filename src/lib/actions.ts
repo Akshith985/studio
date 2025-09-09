@@ -111,6 +111,8 @@ const contactSchema = z.object({
   name: z.string().min(2, { message: "Please enter your name." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   message: z.string().min(10, { message: "Please enter a message of at least 10 characters." }),
+  counsellor: z.string({required_error: "Please select a counsellor."}),
+  date: z.string().min(1, { message: "Please select a date." }),
 });
 
 
@@ -121,6 +123,8 @@ type ContactState = {
         name?: string[];
         email?: string[];
         message?: string[];
+        counsellor?: string[];
+        date?: string[];
     };
 };
 
@@ -132,6 +136,8 @@ export async function sendContactMessageAction(
     name: formData.get("name"),
     email: formData.get("email"),
     message: formData.get("message"),
+    counsellor: formData.get("counsellor"),
+    date: formData.get("date"),
   });
 
   if (!validatedFields.success) {
@@ -142,7 +148,7 @@ export async function sendContactMessageAction(
   }
   
   try {
-    const { name, email, message } = validatedFields.data;
+    const { name, email, message, counsellor, date } = validatedFields.data;
     const apiKey = process.env.BREVO_API_KEY;
 
     if (!apiKey) {
@@ -158,13 +164,9 @@ export async function sendContactMessageAction(
       body: JSON.stringify({
         email,
         attributes: {
-          // Note: 'FIRSTNAME' and 'MESSAGE' are example attribute names.
-          // You must create these attributes in your Brevo account first.
           'FIRSTNAME': name,
-          'MESSAGE': message,
+          'MESSAGE': `${message} - Appointment with ${counsellor} on ${new Date(date).toLocaleDateString()}`,
         },
-        // If you have a specific list you want to add contacts to, specify its ID here.
-        // listIds: [123] 
       }),
     });
 
@@ -255,8 +257,6 @@ export async function sendMessageAction(formData: FormData): Promise<MessageStat
 
   if (token) {
     try {
-      // In a real app, you'd verify the token with Firebase Admin SDK
-      // For this prototype, we'll just trust the client.
       const user = auth.currentUser;
       if (user && user.email) {
         userEmail = user.email;
