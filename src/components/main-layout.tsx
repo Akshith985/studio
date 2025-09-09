@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 const pageTitles: { [key: string]: string } = {
     '/': 'Dashboard',
@@ -39,7 +38,8 @@ const pageTitles: { [key: string]: string } = {
     '/contact': 'Book a Session',
     '/video-call': 'Video Call',
     '/login': 'Login',
-    '/register': 'Register'
+    '/register': 'Register',
+    '/points': 'My Points'
 };
 
 
@@ -165,28 +165,20 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
         <SidebarFooter>
           <SidebarMenu>
             {!loading && user && (
-              <SidebarMenuItem>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <SidebarMenuButton variant="outline" className="h-auto w-full flex-col items-start p-2" tooltip={{children: "Wellness Level & Points", side: "right", align: "center"}}>
-                      <div className="flex w-full items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Trophy className="h-5 w-5 text-yellow-500"/>
-                          <span className="font-semibold text-sm">Wellness Level 5</span>
+                <SidebarMenuItem>
+                    <SidebarMenuButton asChild variant="outline" className="h-auto w-full flex-col items-start p-2" isActive={isActive("/points")} tooltip={{children: "Wellness Level & Points", side: "right", align: "center"}}>
+                      <Link href="/points">
+                        <div className="flex w-full items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Trophy className="h-5 w-5 text-yellow-500"/>
+                            <span className="font-semibold text-sm">Wellness Level 5</span>
+                          </div>
+                          <span className="text-xs text-muted-foreground">60%</span>
                         </div>
-                        <span className="text-xs text-muted-foreground">60%</span>
-                      </div>
-                      <Progress value={60} className="mt-2 h-2 w-full" />
+                        <Progress value={60} className="mt-2 h-2 w-full" />
+                      </Link>
                     </SidebarMenuButton>
-                  </PopoverTrigger>
-                  <PopoverContent side="right" align="start" className="w-auto p-2">
-                    <div className="flex items-center gap-2 text-sm font-semibold">
-                      <Sparkles className="h-5 w-5 text-primary"/>
-                      <span>{points.toLocaleString()} Points</span>
-                    </div>
-                  </PopoverContent>
-                </Popover>
-              </SidebarMenuItem>
+                </SidebarMenuItem>
             )}
             <SidebarSeparator />
               {!loading && user ? (
