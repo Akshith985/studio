@@ -99,11 +99,22 @@ export function MoodTracker() {
       <AlertDialog open={isSadDialogOpen} onOpenChange={setIsSadDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>It's okay to not be okay.</AlertDialogTitle>
+            <AlertDialogTitle>What's the problem champ?</AlertDialogTitle>
             <AlertDialogDescription>
               We all have our tough days. Remember to be kind to yourself. Sometimes a few deep breaths can make a world of difference.
             </AlertDialogDescription>
           </AlertDialogHeader>
+           <div className="flex justify-center">
+             <Image 
+                src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGNrbXo3eWh2ZDNxNzh0cDI1dDByMXU0MDVyZWRiZ3czbWllYnRrbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZBQhoZC0nqknS/giphy.gif"
+                alt="Supportive hug"
+                width={200}
+                height={200}
+                unoptimized
+                className="rounded-lg"
+                data-ai-hint="cute hug"
+            />
+           </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Close</AlertDialogCancel>
             <AlertDialogAction asChild>
