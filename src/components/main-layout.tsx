@@ -160,6 +160,16 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+            {!loading && user && (
+                <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={isActive("/points")} tooltip={{children: "My Points"}}>
+                        <Link href="/points">
+                            <Trophy/>
+                            <span>My Points</span>
+                        </Link>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+            )}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
