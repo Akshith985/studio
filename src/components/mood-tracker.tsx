@@ -89,7 +89,7 @@ export function MoodTracker() {
                   />
               </div>
               <div className="relative bg-muted p-4 rounded-lg rounded-bl-none shadow-md">
-                   <p className="text-md italic text-foreground">&quot;Hello Traveller, welcome to the lands where you love yourself&quot;</p>
+                   <p className="text-md italic text-foreground">&quot;What's Cookin'?&quot;</p>
                    <p className="text-sm text-muted-foreground text-right pr-4">- ChillCat</p>
                    <div className="absolute bottom-0 left-[-10px] w-0 h-0 border-t-[10px] border-t-transparent border-r-[10px] border-r-muted border-b-[10px] border-b-transparent"></div>
               </div>
