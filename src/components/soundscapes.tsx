@@ -19,8 +19,8 @@ export function Soundscapes() {
                  <Image 
                     src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDJteXptaGJzYnY3a3gzc285azRjdWR3NmRnNWxxZHgxZGZmaXhueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TjEXENVrA4PxUsn0zM/giphy.gif"
                     alt="Calming visual"
-                    width={96}
-                    height={96}
+                    width={128}
+                    height={128}
                     unoptimized
                     className="object-cover rounded-lg"
                     data-ai-hint="cozy fireplace"
