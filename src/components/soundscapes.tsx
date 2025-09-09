@@ -1,4 +1,3 @@
-
 // src/components/soundscapes.tsx
 "use client";
 
@@ -18,12 +17,12 @@ export function Soundscapes() {
         <div className="flex justify-center items-center">
             <div className="w-full aspect-video relative overflow-hidden rounded-lg">
                  <Image 
-                    src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2dndm1idmJsaWowcTRoZ2QzZGY0eXF6d2ozY2Y5dmt0N2h3bnZwdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3vR16p72r7i06Fk4/giphy.gif"
+                    src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDJteXptaGJzYnY3a3gzc285azRjdWR3NmRnNWxxZHgxZGZmaXhueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TjEXENVrA4PxUsn0zM/giphy.gif"
                     alt="Calming visual"
                     fill
                     unoptimized
                     className="object-cover"
-                    data-ai-hint="calm ocean"
+                    data-ai-hint="cozy fireplace"
                 />
             </div>
         </div>
