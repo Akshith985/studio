@@ -6,7 +6,7 @@ import { useFormStatus } from "react-dom";
 import { chatbotAction } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bot, Loader2, Send, User } from "lucide-react";
@@ -36,37 +36,46 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
   const [state, formAction] = useActionState(chatbotAction, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  
+  // Ref to track if the initial message has been processed
   const initialMessageSent = useRef(false);
 
   useEffect(() => {
-    // This effect handles the response from the AI for both initial and subsequent messages.
-    if (state.response && messages[messages.length - 1]?.role === 'user') {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: state.response },
-      ]);
+    if (state.response) {
+      // Only add assistant message if the last message is from the user
+      if(messages.length > 0 && messages[messages.length - 1].role === 'user') {
+        setMessages((prev) => [...prev, { role: "assistant", content: state.response! }]);
+      }
     }
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.response, state.error]);
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.response]);
+
   useEffect(() => {
     if (scrollAreaRef.current) {
-        // A bit of a hack to scroll to the bottom.
-        // scrollAreaRef.current.children[1] is the viewport.
         const viewport = scrollAreaRef.current.children[1] as HTMLDivElement;
         if (viewport) {
            viewport.scrollTop = viewport.scrollHeight;
         }
     }
   }, [messages])
-
+  
   useEffect(() => {
     if (initialMessage && !initialMessageSent.current) {
         initialMessageSent.current = true;
+        
+        // This is a programmatic form submission
         const formData = new FormData();
         formData.append("message", initialMessage);
+
         setMessages([{ role: "user", content: initialMessage }]);
-        formAction(formData);
+        
+        // Directly call the server action without triggering the `useActionState` form action
+        // This avoids the transition error
+        chatbotAction(initialState, formData).then(newState => {
+            if (newState.response) {
+                setMessages(prev => [...prev, { role: "assistant", content: newState.response! }]);
+            }
+        });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialMessage]);
@@ -131,6 +140,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
             placeholder="Type your message..."
             autoComplete="off"
             required
+            disabled={initialMessage ? !initialMessageSent.current : false}
           />
           <SubmitButton />
         </form>
