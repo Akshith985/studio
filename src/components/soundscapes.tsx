@@ -125,7 +125,7 @@ export function Soundscapes() {
           </div>
         ) : null}
 
-        <audio ref={audioRef} controls className={!activeSoundscape ? 'hidden' : 'w-full'}>
+        <audio ref={audioRef} controls className={!activeSoundscape ? 'hidden' : 'w-full mt-4'}>
             {activeSoundscape && <source src={activeSoundscape.audioUrl} type="audio/mpeg" />}
             Your browser does not support the audio element.
         </audio>
