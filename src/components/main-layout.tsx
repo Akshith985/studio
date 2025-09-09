@@ -32,14 +32,14 @@ import { Progress } from "./ui/progress";
 const pageTitles: { [key: string]: string } = {
     '/': 'Dashboard',
     '/profile': 'Profile',
+    '/points': 'My Points',
     '/unwind': 'Unwind Corner',
     '/chat-room': 'Chat Room',
     '/chatbot': 'AI Wellness Coach',
     '/contact': 'Book a Session',
     '/video-call': 'Video Call',
     '/login': 'Login',
-    '/register': 'Register',
-    '/points': 'My Points'
+    '/register': 'Register'
 };
 
 
@@ -100,13 +100,13 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-                 <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/points")} tooltip={{children: "My Points"}}>
-                        <Link href="/points">
-                            <Trophy/>
-                            <span>My Points</span>
-                        </Link>
-                    </SidebarMenuButton>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={isActive("/points")} tooltip={{children: "My Points"}}>
+                    <Link href="/points">
+                      <Trophy/>
+                      <span>My Points</span>
+                    </Link>
+                  </SidebarMenuButton>
                 </SidebarMenuItem>
               </>
             )}
