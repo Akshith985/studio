@@ -1,3 +1,4 @@
+
 import { Chatbot } from "@/components/chatbot";
 import Image from "next/image";
 
@@ -7,7 +8,7 @@ export default function ChatbotPage() {
        <p className="text-center mt-2 mb-8 text-lg text-muted-foreground">
          Chat with our AI to get advice and support.
         </p>
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center items-center gap-4 mb-6">
             <Image 
                 src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWN3eDR2bnVqNWdya2ZiZ3Jpa2I0c2FiaXo1djVqcGkwdWJraG5oNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xnmqgLtQZv9M1fo6n4/giphy.gif"
                 alt="Friendly AI Assistant GIF"
@@ -17,6 +18,10 @@ export default function ChatbotPage() {
                 className="rounded-full"
                 data-ai-hint="friendly robot"
             />
+            <div className="relative bg-muted p-4 rounded-lg rounded-bl-none shadow-md">
+                <p className="text-md italic text-foreground">&quot;Hey there pal! Wanna talk?&quot;</p>
+                <div className="absolute bottom-0 left-[-10px] w-0 h-0 border-t-[10px] border-t-transparent border-r-[10px] border-r-muted border-b-[10px] border-b-transparent"></div>
+            </div>
         </div>
       <Chatbot />
     </div>
