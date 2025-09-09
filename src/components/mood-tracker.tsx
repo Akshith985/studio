@@ -53,7 +53,7 @@ export function MoodTracker() {
         </div>
         <div className="flex justify-center items-center">
             <Image 
-                src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTdwaXAwcHVnM2NrNzZwMm92ZnA0eWQ4bnVkaXNkeWRvN2M3d3dkNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/bCZ68PARXygBlcWVAQ/giphy.gif"
+                src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXc2NnQyNHg4eXl0cG44Ympkenk2ZWtlcTE4d29ndzl3eGR2dG1oYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/4zPGdstL9xlbh4GVmL/giphy.gif"
                 alt="Your friendly mascot"
                 width={150}
                 height={150}
