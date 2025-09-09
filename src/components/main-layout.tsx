@@ -23,6 +23,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
   SidebarFooter,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { Users2 } from "lucide-react";
@@ -144,27 +145,27 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+             {!loading && user && (
+                <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={isActive("/profile")} tooltip={{children: "Profile"}}>
+                        <Link href="/profile">
+                            <User/>
+                            <span>Profile</span>
+                        </Link>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
             <SidebarMenu>
               {!loading && user ? (
-                <>
-                  <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/profile")} tooltip={{children: "Profile"}}>
-                          <Link href="/profile">
-                              <User/>
-                              <span>Profile</span>
-                          </Link>
-                      </SidebarMenuButton>
-                  </SidebarMenuItem>
                   <SidebarMenuItem>
                       <SidebarMenuButton onClick={handleLogout} tooltip={{children: "Logout"}}>
                           <LogOut/>
                           <span>Logout</span>
                       </SidebarMenuButton>
                   </SidebarMenuItem>
-                </>
               ) : !loading && (
                 <>
                   <SidebarMenuItem>
