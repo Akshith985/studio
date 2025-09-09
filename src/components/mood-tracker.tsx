@@ -63,7 +63,8 @@ export function MoodTracker() {
                 />
             </div>
             <div className="w-2/3">
-                 <p className="text-2xl font-bold text-center italic text-primary">&quot;What&apos;s cookin&apos;?&quot;</p>
+                 <p className="text-4xl font-bold text-center italic text-primary">&quot;What&apos;s cookin&apos;?&quot;</p>
+                 <p className="text-md text-muted-foreground text-right pr-4">- ChillCat</p>
             </div>
         </div>
       </CardContent>
