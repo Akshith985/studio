@@ -49,12 +49,13 @@ export function Soundscapes() {
     const audioElement = audioRef.current;
     if (audioElement) {
         if (activeSoundscape) {
-            audioElement.src = activeSoundscape.audioUrl;
-            audioElement.load();
+            if (audioElement.src !== activeSoundscape.audioUrl) {
+                audioElement.src = activeSoundscape.audioUrl;
+                audioElement.load();
+            }
             audioElement.play().catch(error => console.error("Audio playback failed:", error));
         } else {
             audioElement.pause();
-            audioElement.src = "";
         }
     }
   }, [activeSoundscape]);
