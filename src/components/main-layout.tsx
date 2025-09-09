@@ -1,3 +1,4 @@
+
 // src/components/main-layout.tsx
 "use client";
 
@@ -9,6 +10,7 @@ import { useAuth } from "@/context/auth-provider";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { usePoints } from "@/context/points-provider";
 
 import {
   Sidebar,
@@ -42,6 +44,7 @@ const pageTitles: { [key: string]: string } = {
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, loading } = useAuth();
+  const { points } = usePoints();
   const router = useRouter();
 
   const isActive = (path: string) => pathname === path;
@@ -211,7 +214,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             {!loading && user && (
                 <div className="flex items-center gap-2 rounded-full bg-accent/80 px-4 py-2 text-sm font-semibold text-accent-foreground">
                     <Sparkles className="h-5 w-5 text-primary"/>
-                    <span>1,250 Points</span>
+                    <span>{points.toLocaleString()} Points</span>
                 </div>
             )}
         </header>

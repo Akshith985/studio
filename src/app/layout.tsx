@@ -1,8 +1,10 @@
+
 import type { Metadata } from "next";
 import { MainLayout } from "@/components/main-layout";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { AuthProvider } from "@/context/auth-provider";
+import { PointsProvider } from "@/context/points-provider";
 
 export const metadata: Metadata = {
   title: "SereneMind",
@@ -23,7 +25,9 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <AuthProvider>
-          <MainLayout>{children}</MainLayout>
+          <PointsProvider>
+            <MainLayout>{children}</MainLayout>
+          </PointsProvider>
         </AuthProvider>
         <Toaster />
       </body>
