@@ -275,7 +275,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
-                    <p className="text-xs mt-1">Points</p>
+                    <p className="text-xs mt-1 font-bold italic">Points</p>
                   </div>
             </div>
         </header>
