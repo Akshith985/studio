@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 const pageTitles: { [key: string]: string } = {
     '/': 'Dashboard',
@@ -163,16 +164,26 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
         </SidebarContent>
         <SidebarFooter className="p-4 space-y-4">
             {!loading && user && (
-                <div className="rounded-lg bg-accent/50 p-3 space-y-2 group-data-[collapsible=icon]:hidden">
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                           <Trophy className="h-5 w-5 text-yellow-500"/>
-                           <span className="font-semibold text-sm">Wellness Level 5</span>
-                        </div>
-                        <span className="text-xs text-muted-foreground">60%</span>
-                    </div>
-                    <Progress value={60} className="h-2" />
-                </div>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <div className="rounded-lg bg-accent/50 p-3 space-y-2 group-data-[collapsible=icon]:hidden cursor-pointer hover:bg-accent">
+                      <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Trophy className="h-5 w-5 text-yellow-500"/>
+                            <span className="font-semibold text-sm">Wellness Level 5</span>
+                          </div>
+                          <span className="text-xs text-muted-foreground">60%</span>
+                      </div>
+                      <Progress value={60} className="h-2" />
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto" align="end" side="top">
+                  <div className="flex items-center gap-2 text-sm font-semibold">
+                    <Sparkles className="h-5 w-5 text-primary"/>
+                    <span>{points.toLocaleString()} Points</span>
+                  </div>
+                </PopoverContent>
+              </Popover>
             )}
             <SidebarSeparator />
             <SidebarMenu>
