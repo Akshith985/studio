@@ -8,7 +8,7 @@ export function Soundscapes() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Visual Relaxation</CardTitle>
+        <CardTitle>Check this out!</CardTitle>
         <CardDescription>
           Take a moment to unwind with calming visuals.
         </CardDescription>
