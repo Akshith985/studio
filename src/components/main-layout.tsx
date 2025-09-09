@@ -179,7 +179,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                       <Progress value={60} className="mt-2 h-2 w-full" />
                     </SidebarMenuButton>
                   </PopoverTrigger>
-                  <PopoverContent side="top" align="center" className="w-auto p-2">
+                  <PopoverContent side="right" align="start" className="w-auto p-2">
                     <div className="flex items-center gap-2 text-sm font-semibold">
                       <Sparkles className="h-5 w-5 text-primary"/>
                       <span>{points.toLocaleString()} Points</span>
