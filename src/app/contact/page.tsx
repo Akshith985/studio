@@ -92,9 +92,15 @@ export default function ContactPage() {
         <Card>
           <form ref={formRef} action={formAction}>
             <CardHeader>
-                <div className="flex items-center gap-4">
-                    <Image
-                        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3hsdGxscGpyZ3Njb2ZlMGc4OHhjcDQ1dG1jdmg1eGJteWsyYjFiaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iG5iE1D4bS2t0s3t2T/giphy.gif"
+                <div className="flex justify-between items-center gap-4">
+                    <div>
+                        <CardTitle>Booking Form</CardTitle>
+                        <CardDescription>
+                            Your request will be sent securely to the selected professional.
+                        </CardDescription>
+                    </div>
+                     <Image
+                        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExczA0bmVhenEzMjVsMjU3bngwYWl4Z3Npb2o5bnphdXJyMG5oYWl6dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iCtxYMMqOH933M4Ey2/giphy.gif"
                         alt="Booking GIF"
                         width={80}
                         height={80}
@@ -102,12 +108,6 @@ export default function ContactPage() {
                         className="rounded-lg"
                         data-ai-hint="calendar booking"
                     />
-                    <div>
-                        <CardTitle>Booking Form</CardTitle>
-                        <CardDescription>
-                            Your request will be sent securely to the selected professional.
-                        </CardDescription>
-                    </div>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
