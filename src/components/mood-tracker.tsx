@@ -111,7 +111,7 @@ export function MoodTracker() {
                 className="rounded-lg"
                 data-ai-hint="supportive pat"
             />
-            <p className="text-lg font-medium text-muted-foreground">Remember, take time for yourself.</p>
+            <p className="text-lg font-medium text-muted-foreground italic">&quot;Remember, take time for yourself.&quot;</p>
            </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Close</AlertDialogCancel>
