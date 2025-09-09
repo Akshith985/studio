@@ -3,7 +3,6 @@
 
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Video } from "lucide-react";
 
 export function Soundscapes() {
   return (
@@ -16,22 +15,25 @@ export function Soundscapes() {
       </CardHeader>
       <CardContent>
         <div className="grid md:grid-cols-2 gap-6 items-center">
-            <div className="relative overflow-hidden rounded-lg flex-shrink-0">
+            <div className="relative overflow-hidden rounded-lg flex-shrink-0 aspect-square">
                  <Image 
                     src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDJteXptaGJzYnY3a3gzc285azRjdWR3NmRnNWxxZHgxZGZmaXhueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TjEXENVrA4PxUsn0zM/giphy.gif"
                     alt="Calming visual"
-                    width={250}
-                    height={250}
+                    fill
                     unoptimized
-                    className="object-cover rounded-lg w-full aspect-square"
+                    className="object-cover rounded-lg"
                     data-ai-hint="cozy fireplace"
                 />
             </div>
-            <div className="relative aspect-square bg-muted rounded-lg flex items-center justify-center">
-              <Video className="w-16 h-16 text-muted-foreground" />
-              <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
-                 <p className="text-white font-semibold">Video Placeholder</p>
-              </div>
+            <div className="relative overflow-hidden rounded-lg w-full" style={{paddingTop: "56.25%"}}>
+                 <iframe 
+                    className="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/OGZjYnZg4Cs" 
+                    title="YouTube video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen>
+                 </iframe>
             </div>
         </div>
       </CardContent>
