@@ -2,6 +2,7 @@
 'use client';
 
 import { useActionState, useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useFormStatus } from 'react-dom';
 import { sendContactMessageAction } from '@/lib/actions';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -91,10 +92,23 @@ export default function ContactPage() {
         <Card>
           <form ref={formRef} action={formAction}>
             <CardHeader>
-              <CardTitle>Booking Form</CardTitle>
-              <CardDescription>
-                Your request will be sent securely to the selected professional.
-              </CardDescription>
+                <div className="flex items-center gap-4">
+                    <Image
+                        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3hsdGxscGpyZ3Njb2ZlMGc4OHhjcDQ1dG1jdmg1eGJteWsyYjFiaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iG5iE1D4bS2t0s3t2T/giphy.gif"
+                        alt="Booking GIF"
+                        width={80}
+                        height={80}
+                        unoptimized
+                        className="rounded-lg"
+                        data-ai-hint="calendar booking"
+                    />
+                    <div>
+                        <CardTitle>Booking Form</CardTitle>
+                        <CardDescription>
+                            Your request will be sent securely to the selected professional.
+                        </CardDescription>
+                    </div>
+              </div>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="space-y-4">
