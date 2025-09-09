@@ -1,12 +1,10 @@
-
-
 // src/components/main-layout.tsx
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Phone, User, UserPlus, Users, Wind } from "lucide-react";
+import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Phone, Sparkles, Trophy, User, UserPlus, Users, Users2, Wind } from "lucide-react";
 import { useAuth } from "@/context/auth-provider";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
@@ -26,7 +24,7 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
-import { Users2 } from "lucide-react";
+import { Progress } from "./ui/progress";
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -157,7 +155,24 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter>
+        <SidebarFooter className="p-4 space-y-4">
+            {!loading && user && (
+                <div className="rounded-lg bg-accent/50 p-3 space-y-2 group-data-[collapsible=icon]:hidden">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                           <Trophy className="h-5 w-5 text-yellow-500"/>
+                           <span className="font-semibold text-sm">Wellness Level 5</span>
+                        </div>
+                        <span className="text-xs text-muted-foreground">60%</span>
+                    </div>
+                    <Progress value={60} className="h-2" />
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Sparkles className="h-4 w-4 text-primary"/>
+                        <span>1,250 Points</span>
+                    </div>
+                </div>
+            )}
+            <SidebarSeparator />
             <SidebarMenu>
               {!loading && user ? (
                   <SidebarMenuItem>
