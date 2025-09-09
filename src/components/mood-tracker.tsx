@@ -106,13 +106,13 @@ export function MoodTracker() {
           </AlertDialogHeader>
            <div className="flex justify-center">
              <Image 
-                src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGNrbXo3eWh2ZDNxNzh0cDI1dDByMXU0MDVyZWRiZ3czbWllYnRrbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZBQhoZC0nqknS/giphy.gif"
-                alt="Supportive hug"
+                src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTJkeGdvMzB1ZGFoOG1uaXBsMDh5NDZobmpzbWVtN2F0Y2VyOWpmayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/4tyXpIGdDdPdF7E5ok/giphy.gif"
+                alt="Supportive pat"
                 width={200}
                 height={200}
                 unoptimized
                 className="rounded-lg"
-                data-ai-hint="cute hug"
+                data-ai-hint="supportive pat"
             />
            </div>
           <AlertDialogFooter>
