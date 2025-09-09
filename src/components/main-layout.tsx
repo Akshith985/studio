@@ -4,6 +4,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Phone, Sparkles, Trophy, User, UserPlus, Users, Users2, Wind } from "lucide-react";
 import { useAuth } from "@/context/auth-provider";
@@ -211,12 +212,25 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 <SidebarTrigger className="md:hidden" />
                 <h1 className="text-2xl font-bold tracking-tight">{pageTitle}</h1>
              </div>
-            {!loading && user && (
-                <div className="flex items-center gap-2 rounded-full bg-accent/80 px-4 py-2 text-sm font-semibold text-accent-foreground">
-                    <Sparkles className="h-5 w-5 text-primary"/>
-                    <span>{points.toLocaleString()} Points</span>
-                </div>
-            )}
+             <div className="flex items-center gap-4">
+                {!loading && user && (
+                    <div className="flex items-center gap-2 rounded-full bg-accent/80 px-4 py-2 text-sm font-semibold text-accent-foreground">
+                        <Sparkles className="h-5 w-5 text-primary"/>
+                        <span>{points.toLocaleString()} Points</span>
+                    </div>
+                )}
+                 <Button variant="ghost" size="icon" className="relative h-10 w-10">
+                    <Image
+                        src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Foc3o3eGh1eGNxNTA5eG8wMno0bzE5Z2xneWdteHN6eWc3aXp6cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/NF6A4zE12LgdYIuYxN/giphy.gif"
+                        alt="Gift Icon"
+                        width={40}
+                        height={40}
+                        unoptimized
+                        className="rounded-full object-cover"
+                        data-ai-hint="gift box"
+                    />
+                </Button>
+            </div>
         </header>
         <div className="flex-1">
           {children}
