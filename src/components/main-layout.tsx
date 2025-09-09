@@ -1,11 +1,10 @@
-
 // src/components/main-layout.tsx
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrainCircuit, HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Phone, Sparkles, Trophy, User, UserPlus, Users, Users2, Wind } from "lucide-react";
+import { HeartPulse, LayoutDashboard, LogIn, LogOut, MessageCircle, Phone, Sparkles, Trophy, User, UserPlus, Users, Users2, Wind } from "lucide-react";
 import { useAuth } from "@/context/auth-provider";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
@@ -85,24 +84,12 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             <SidebarMenuItem>
               <SidebarMenuButton
                 asChild
-                isActive={isActive("/meditation")}
-                tooltip={{ children: "Meditation" }}
+                isActive={isActive("/unwind")}
+                tooltip={{ children: "Unwind Corner" }}
               >
-                <Link href="/meditation">
-                  <BrainCircuit />
-                  <span>Guided Meditation</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                isActive={isActive("/breathing")}
-                tooltip={{ children: "Breathing" }}
-              >
-                <Link href="/breathing">
+                <Link href="/unwind">
                   <Wind />
-                  <span>Breathing Exercises</span>
+                  <span>Unwind Corner</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

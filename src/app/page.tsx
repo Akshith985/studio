@@ -4,7 +4,7 @@ import { Soundscapes } from "@/components/soundscapes";
 import { WellnessTip } from "@/components/wellness-tip";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BrainCircuit, Wind } from "lucide-react";
+import { Wind } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -33,15 +33,9 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
               <Button asChild size="lg">
-                <Link href="/meditation">
-                  <BrainCircuit className="mr-2 h-5 w-5" />
-                  Start Guided Meditation
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="secondary">
-                <Link href="/breathing">
+                <Link href="/unwind">
                   <Wind className="mr-2 h-5 w-5" />
-                  Practice Breathing
+                  Go to Unwind Corner
                 </Link>
               </Button>
             </CardContent>
