@@ -165,21 +165,21 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
         <SidebarFooter>
           <SidebarMenu>
             {!loading && user && (
-               <SidebarMenuItem>
+              <SidebarMenuItem>
                 <Popover>
                   <PopoverTrigger asChild>
                     <SidebarMenuButton variant="outline" className="h-auto w-full flex-col items-start p-2" tooltip={{children: "Wellness Level & Points", side: "right", align: "center"}}>
-                        <div className="flex w-full items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <Trophy className="h-5 w-5 text-yellow-500"/>
-                              <span className="font-semibold text-sm">Wellness Level 5</span>
-                            </div>
-                            <span className="text-xs text-muted-foreground">60%</span>
+                      <div className="flex w-full items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Trophy className="h-5 w-5 text-yellow-500"/>
+                          <span className="font-semibold text-sm">Wellness Level 5</span>
                         </div>
-                        <Progress value={60} className="mt-2 h-2 w-full" />
+                        <span className="text-xs text-muted-foreground">60%</span>
+                      </div>
+                      <Progress value={60} className="mt-2 h-2 w-full" />
                     </SidebarMenuButton>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto" align="end" side="top">
+                  <PopoverContent side="top" align="center" className="w-auto p-2">
                     <div className="flex items-center gap-2 text-sm font-semibold">
                       <Sparkles className="h-5 w-5 text-primary"/>
                       <span>{points.toLocaleString()} Points</span>
