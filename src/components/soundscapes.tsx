@@ -15,7 +15,7 @@ export function Soundscapes() {
       </CardHeader>
       <CardContent>
         <div className="flex justify-center items-center">
-            <div className="w-full aspect-video relative overflow-hidden rounded-lg">
+            <div className="w-full max-w-lg aspect-video relative overflow-hidden rounded-lg">
                  <Image 
                     src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDJteXptaGJzYnY3a3gzc285azRjdWR3NmRnNWxxZHgxZGZmaXhueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TjEXENVrA4PxUsn0zM/giphy.gif"
                     alt="Calming visual"
