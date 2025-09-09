@@ -26,12 +26,26 @@ import {
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
 
+const pageTitles: { [key: string]: string } = {
+    '/': 'Dashboard',
+    '/profile': 'Profile',
+    '/unwind': 'Unwind Corner',
+    '/chat-room': 'Chat Room',
+    '/chatbot': 'AI Wellness Coach',
+    '/contact': 'Book a Session',
+    '/video-call': 'Video Call',
+    '/login': 'Login',
+    '/register': 'Register'
+};
+
+
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, loading } = useAuth();
   const router = useRouter();
 
   const isActive = (path: string) => pathname === path;
+  const pageTitle = pageTitles[pathname] || 'SereneMind';
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -154,10 +168,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                         <span className="text-xs text-muted-foreground">60%</span>
                     </div>
                     <Progress value={60} className="h-2" />
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Sparkles className="h-4 w-4 text-primary"/>
-                        <span>1,250 Points</span>
-                    </div>
                 </div>
             )}
             <SidebarSeparator />
@@ -192,15 +202,22 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             </SidebarMenu>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset className="p-4 lg:p-6">
-        <header className="mb-6 flex items-center justify-between md:hidden">
-             <Link href="/" className="flex items-center gap-2 text-primary">
-                <HeartPulse className="h-6 w-6" />
-                <span className="text-lg font-bold">SereneMind</span>
-            </Link>
-            <SidebarTrigger />
+      <SidebarInset className="p-4 lg:p-6 flex flex-col">
+        <header className="mb-6 flex items-center justify-between">
+             <div className="flex items-center gap-4">
+                <SidebarTrigger className="md:hidden" />
+                <h1 className="text-2xl font-bold tracking-tight">{pageTitle}</h1>
+             </div>
+            {!loading && user && (
+                <div className="flex items-center gap-2 rounded-full bg-accent/80 px-4 py-2 text-sm font-semibold text-accent-foreground">
+                    <Sparkles className="h-5 w-5 text-primary"/>
+                    <span>1,250 Points</span>
+                </div>
+            )}
         </header>
-        {children}
+        <div className="flex-1">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

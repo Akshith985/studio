@@ -16,12 +16,9 @@ export default function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold tracking-tight">Your Profile</h1>
-        <p className="mt-2 text-lg text-muted-foreground">
+       <p className="mt-2 text-lg text-muted-foreground text-center mb-8">
           View and manage your account details.
         </p>
-      </div>
       <Card>
         <CardHeader>
           <div className="flex items-center gap-4">

@@ -75,12 +75,9 @@ export default function ContactPage() {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold tracking-tight">Book a Session</h1>
-        <p className="mt-2 text-lg text-muted-foreground">
+       <p className="mt-2 text-lg text-muted-foreground text-center mb-8">
           Choose a counsellor, select a date, and leave a message to book your appointment.
         </p>
-      </div>
       
       {state.success ? (
         <Alert variant="default" className="border-green-500 text-green-700">
