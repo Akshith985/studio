@@ -31,7 +31,7 @@ function SubmitButton() {
   );
 }
 
-export function Chatbot() {
+export function Chatbot({ initialMessage }: { initialMessage?: string }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [state, formAction] = useActionState(chatbotAction, initialState);
   const formRef = useRef<HTMLFormElement>(null);
@@ -66,6 +66,15 @@ export function Chatbot() {
     }
   }, [messages])
 
+  useEffect(() => {
+    if (initialMessage) {
+        const formData = new FormData();
+        formData.append("message", initialMessage);
+        handleFormAction(formData);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialMessage])
+
   return (
     <Card className="flex flex-col flex-1">
       <CardContent className="flex-1 p-6 overflow-hidden">
@@ -80,7 +89,8 @@ export function Chatbot() {
                 )}
               >
                 {message.role === "assistant" && (
-                  <Avatar>
+                   <Avatar>
+                    <AvatarImage src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWN3eDR2bnVqNWdya2ZiZ3Jpa2I0c2FiaXo1djVqcGkwdWJraG5oNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xnmqgLtQZv9M1fo6n4/giphy.gif" alt="AI Assistant" data-ai-hint="friendly robot" />
                     <AvatarFallback>
                       <Bot />
                     </AvatarFallback>
