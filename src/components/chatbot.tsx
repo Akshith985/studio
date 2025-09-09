@@ -62,7 +62,7 @@ export function Chatbot({ initialMessage }: { initialMessage?: string }) {
     if (initialMessage) {
         const formData = new FormData();
         formData.append("message", initialMessage);
-        setMessages((prev) => [...prev, { role: "user", content: initialMessage }]);
+        setMessages([{ role: "user", content: initialMessage }]);
         formAction(formData);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
