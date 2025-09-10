@@ -59,7 +59,7 @@ export function BreathingVisualizer({ cycles, onFinish }: BreathingVisualizerPro
             <CardContent className="flex flex-col items-center justify-center p-6 text-center h-[400px]">
                 <div className="relative flex items-center justify-center w-64 h-64">
                     <div
-                        className={`absolute w-full h-full bg-primary/20 rounded-full transition-transform duration-[3000ms] ease-in-out ${config.scale}`}
+                        className={`absolute w-full h-full bg-primary/20 rounded-full transition-transform duration-3000 ease-in-out ${config.scale}`}
                         style={{ transitionDuration: `${config.duration}ms` }}
                     />
                     <div className="z-10 text-center">
