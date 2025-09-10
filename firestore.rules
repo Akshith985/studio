@@ -1,0 +1,25 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Rules for the chat room
+    match /messages/{messageId} {
+      // Anyone can read the messages in the chat room.
+      allow read: if true;
+      
+      // Only authenticated users can create new messages.
+      allow create: if request.auth != null;
+      
+      // Users cannot update or delete messages.
+      allow update, delete: if false;
+    }
+
+    // You can add rules for other collections here.
+    // For example, to deny all access to other collections:
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
